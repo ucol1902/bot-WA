@@ -8,16 +8,16 @@ function doPost(e) {
   var senderName = JSON.stringify(reqJson["postData"]["contents"]["senderName"]);// jangan dirubah
 
   var parsedMessage = senderMessage
-                      .replace("Laporann","1#") // merubah text yang tidak diperlukan
+                      .replace("Laporan","1#") // merubah text yang tidak diperlukan
                       .replace("nTanggal:","#") // merubah text yang tidak diperlukan
                       .replace("nIsi Laporan:","#") // merubah text yang tidak diperlukan
                       .split("#"); // string pemisah pesan
   var jumlah_pesan = parsedMessage.length; // menghitung jumlah pesan
-  var tanggal = parsedMessage[1].trim(); // mengambil data isi pesan pertama
-  var laporan = parsedMessage[2].trim().replace('"',''); // mengambil data isi pesan kedua
+  var tanggal = parsedMessage[2].trim(); // mengambil data isi pesan pertama
+  var laporan = parsedMessage[3].trim().replace('"',''); // mengambil data isi pesan kedua
   var pelapor = senderName.replace('"','').replace('"',''); // mengambil data pelapor
 
-  if (jumlah_pesan == 3){ // validasi jumlah isi pesan
+  if (jumlah_pesan == 4){ // validasi jumlah isi pesan
     sheet.insertRowAfter(1); //insert 1 baris
     sheet.getRange(2,1).setValue(Utilities.formatDate(new Date(), "GMT+7:00", "dd-MMM-yyyy' 'HH:mm")); //memasukkan data tanggal pesan
     sheet.getRange(2,2).setValue(tanggal);// memasukkan data tanggal laporan ke kolom kedua
@@ -35,7 +35,7 @@ function doPost(e) {
     var response = { // membuat balasan pesan WA jika format salah
       data: [
         {
-          message: "Mohon maaf, " + pelapor + ". Laporan tidak terekap. \n" +
+          message: "Mohon maaf, " + senderMessage +jumlah_pesan+ ". Laporan tidak terekap. \n" +
           "Mohon sesuaikan dengan format laporan yang sudah ada. Terima kasih."
         }
       ]
