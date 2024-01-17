@@ -25,7 +25,7 @@ function doPost(e) {
   var pelapor = senderName.replace('"','').replace('"',''); // mengambil data pelapor
 
   if (jumlah_pesan == 6){ // validasi jumlah isi pesan
-    sheet.insertRowAfter(10); //insert 1 baris disesuaikan dengan posisi header
+    sheet.insertRowAfter(1); //insert 1 baris disesuaikan dengan posisi header
     sheet.getRange(2,1).setValue(Utilities.formatDate(new Date(), "GMT+7:00", "dd-MMM-yyyy' 'HH:mm")); //memasukkan data tanggal pesan (optional)
     sheet.getRange(2,2).setValue(ulp);// memasukkan data tanggal laporan ke kolom kedua
     sheet.getRange(2,3).setValue(tanggal);// memasukkan data isi laporan ke kolom ketiga
